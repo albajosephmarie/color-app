@@ -12,3 +12,6 @@ body {
   font-family: Arial, sans-serif; /* Set your default font-family here */
 }
 
+div {
+  user-select: none;
+}

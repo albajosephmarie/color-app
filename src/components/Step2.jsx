@@ -4,13 +4,45 @@ import ColorPalette from "./ColorPalette"
 import ChosenPalette from "./ChosenPalette"
 import BreadCrumbs from "./BreadCrumbs"
 
+const ColorHeader = () => {
+  const { color } = useColor()
+  return (
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      margin: "0.4rem"
+    }}>
+      <div style={{ fontWeight: 'bold' }}>{color}</div>
+    </div>
+  )
+}
+
+const ColorMode = () => {
+  return (
+    <div style={{
+      display: 'flex', marginTop: "0.4rem", marginBottom: "0.4rem"
+    }}>
+      <div style={{ width: "50%", border: "1px solid #ccc", textAlign: "center", padding: "0.2rem", fontSize: "1.2rem", background:"#ccc", color: "yellow" }}>&#9728;</div>
+      <div style={{ width: "50%", border: "1px solid #ccc", textAlign: "center", padding: "0.2rem", fontSize: "1.2rem" }}>&#127769;</div>
+    </div>
+  )
+}
 const Main = () => {
   return (
     <div style={{
       display: 'flex',
       gap: '0.4rem',
     }}>
-      <ColorPalette step={2} />
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        border: "1px solid #ccc",
+        padding: "0.4rem"
+      }}>
+        <ColorHeader />
+        <ColorMode />
+        <ColorPalette step={2} />
+      </div>
       <div style={{
         display: 'flex',
         flexDirection: 'column',
@@ -54,7 +86,7 @@ const Step2 = () => {
       marginRight: '1rem',
       marginTop: '1rem',
     }}>
-      <BreadCrumbs step={2}/>
+      <BreadCrumbs step={2} />
       <Header />
       <Main />
     </div>

@@ -174,7 +174,7 @@ function colorReducer(state, action) {
         return { backgroundKey: e.key, backgroundColor: e.color, colorKey: 'none', color: 'none', contrast: 0, apca: 0, AANormal: false, AALarge: false, AAANormal: false, AAALarge: false }
       })
       const generatedColorIndex = shades.findIndex( e =>  e.color === generatedColor )
-      return { ...state, shades, generatedColorIndex, chosenPalette, step: 2 };
+      return { ...state, shades, color: generatedColor, generatedColorIndex, chosenPalette, step: 2 };
     }
     case "CHOOSE_SHADE_INDEX": {
       return { ...state, shadesIndex: payload.shadesIndex }
