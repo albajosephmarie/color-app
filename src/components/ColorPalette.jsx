@@ -48,7 +48,6 @@ const ColorPalette = () => {
                   width: "1rem",
                   height: "1rem",
                   display: `${show(i === generatedColorIndex)}`,
-                  border: "1px solid #ccc",
                   borderRadius: "50%",
                   marginTop: "0.8rem",
                   marginLeft: "0.9rem",
