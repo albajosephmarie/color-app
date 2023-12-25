@@ -5,19 +5,41 @@ import ChosenPalette from "./ChosenPalette"
 
 const Main = () => {
   return (
-    <div style={{
-      display: 'flex',
-      gap: '0.4rem',
-    }}>
-      <ColorPalette step={3} />
+    <>
       <div style={{
         display: 'flex',
-        flexDirection: 'column',
-        gap: '0.4rem'
+        gap: '0.4rem',
+        border: '1px solid #ccc'
       }}>
-        <ChosenPalette step={3} />
+        <ColorPalette step={3} style={{  border: '1px solid #ccc'}} />
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.4rem'
+        }}>
+          <ChosenPalette step={3} />
+        </div>
       </div>
-    </div>
+      
+      <div style={{
+        display: 'flex',
+        gap: '0.4rem',
+        border: '1px solid #ccc',
+        marginTop: '1rem',        
+        background: 'black',
+        color: 'white'
+      }}>
+        <ColorPalette step={30} style={{  border: '1px solid #ccc'}} />
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.4rem'
+        }}>
+          <ChosenPalette step={30} />
+        </div>
+      </div>
+
+    </>
   )
 }
 
@@ -53,7 +75,7 @@ const Step3 = () => {
       marginRight: '1rem',
       marginTop: '1rem',
     }}>
-      <BreadCrumbs step={3}/>
+      <BreadCrumbs step={3} />
       <Header />
       <Main />
     </div>

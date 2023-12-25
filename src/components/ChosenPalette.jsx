@@ -79,8 +79,15 @@ const ChosenCard = (e) => {
 
 const ChosenPalette = ({step}) => {
   const { chosenPalette, numberOfShades, mode, darkModeChosenPalette } = useColor()
-  const cTitle = (step === 2) ?  'Your chosen palette will appear below:' : 'Light Mode'
-  const chosenPaletteToShow = (mode === 'dark') ? darkModeChosenPalette : chosenPalette
+  const cTitle = (step === 2) ?  'Your chosen palette will appear below:' : (step === 3) ? 'Light Mode' : 'Dark Mode'
+  let chosenPaletteToShow
+  if (step === 2) {
+    chosenPaletteToShow = (mode === 'dark') ? darkModeChosenPalette : chosenPalette
+  } else if (step === 3) {
+    chosenPaletteToShow = chosenPalette
+  } else if (step === 30)
+    chosenPaletteToShow = darkModeChosenPalette
+
   return (
     <div style={{ border: '1px solid #ccc' }}>
       <h2 style={{ fontSize: '1.2rem', fontWeight: 'lighter', margin: '0.8rem 0 0.1rem 0.8rem' }}>{cTitle}</h2>
