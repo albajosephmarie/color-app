@@ -55,6 +55,12 @@ export function ColorProvider({ children }) {
     })
   }
 
+  const enterColor = () => {
+    dispatch({
+      type: "ENTER_COLOR"
+    })
+  }
+
   const value = {
     color: state.color,
     numberOfShades: state.numberOfShades,
@@ -62,6 +68,7 @@ export function ColorProvider({ children }) {
     step: state.step,
     shadesIndex: state.shadesIndex,
     chosenPalette: state.chosenPalette,
+    enterColor,
     updateColor,
     updateNumberOfShades,
     generatePalette,
@@ -110,6 +117,9 @@ function contrastChecker(color, colorArray) {
 function colorReducer(state, action) {
   const { type, payload } = action;
   switch (type) {
+    case "ENTER_COLOR": {
+      return { ...state, step: 1}
+    }
     case "UPDATE_COLOR": {
       const newColor = colord(payload.color).toHex();
       return { ...state, color: newColor };

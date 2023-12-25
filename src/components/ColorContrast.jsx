@@ -38,7 +38,7 @@ const ColorContrast = () => {
     <div style={{ border: '1px solid #ccc' }}>
       <h2 style={{ fontSize: '1.2rem', fontWeight: 'lighter', margin: '0.8rem' }}>Select one:</h2>
       <div style={{
-        display: 'flex', flexWrap: 'wrap', gap: '0.4rem', width: '100%', marginLeft: "0.4rem", marginBottom: "0.4rem"
+        display: 'flex', flexWrap: 'wrap', gap: '0.4rem',  marginLeft: "0.4rem", marginBottom: "0.4rem"
       }}>
         {
           shades[shadesIndex].data.map((e, colorIndex) => {
@@ -47,8 +47,7 @@ const ColorContrast = () => {
                 border: `${borderStyle(e.key)}`,
                 minWidth: '12rem',
                 height: '9rem',
-                marginTop: '0.2rem',
-                marginLeft: "0.2rem",
+                margin: '0.2rem',
               }}
                 onClick={() => {
                  handleClick(shadesIndex, colorIndex, e.key)
