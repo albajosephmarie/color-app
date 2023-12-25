@@ -21,7 +21,6 @@ const ColorPalette = () => {
           key={e.key}
           style={{
             backgroundColor: `${background(i == shadesIndex)}`,
-            border: "1px solid #ccc",
             margin: "0 auto",
           }}
           onClick={() => chooseShadeIndex(i)}
