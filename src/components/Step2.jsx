@@ -35,9 +35,9 @@ const Header = () => {
       justifyContent: "space-between",
       marginBottom: "0.4rem"
     }}>
-      <button style={{ color: "#93bfec", background: "white", fontWeight: "bold", padding: ".5em 1em", border: "1px solid #ccc" }} onClick={handleClick}>{"< GO BACK "}</button>
-      <div style={{display: 'flex', justifyContent: 'space-between', width: "30rem", fontSize: "0.8rem", color: "#222"}}><div><span><span style={{color: "white", background:"#93bfec", borderRadius: "50%", padding: "0.2rem"}}>&#x2713;</span>&nbsp;Generate palette&nbsp;<span style={{ color: "#ccc"}}>&mdash;&mdash;&mdash;</span></span><span>&nbsp;&nbsp;<span style={{color: "white", background:"#93bfec", borderRadius: "50%", padding: "0.2rem"}}>&#x2713;</span>&nbsp;Match colors&nbsp;&mdash;&mdash;&mdash;</span><span>&nbsp;&nbsp;<span style={{color: "white", background:"#93bfec", borderRadius: "50%", padding: "0.2rem"}}>&#x2713;</span>&nbsp;Save</span></div></div>
-      <button style={{ color: "white", background: "#93bfec", padding: ".5em 1em", border: "1px solid #ccc"}}>Download as SVG</button>
+      <button style={{ color: "#93bfec", background: "white", fontWeight: "bold", padding: ".5em 1em", border: "1px solid #ccc" }} onClick={handleClick}>&nbsp;&lt;&nbsp;GO BACK</button>
+      <div style={{display: 'flex', justifyContent: 'space-between', width: "30rem", fontSize: "0.8rem", color: "#222"}}><div><span><span style={{color: "white", background:"#93bfec", borderRadius: "50%", padding: "0.2rem"}}>&#x2713;</span>&nbsp;Generate palette&nbsp;<span style={{ color: "#ccc"}}>&mdash;&mdash;&mdash;</span></span><span>&nbsp;&nbsp;<span style={{color: "white", background:"#93bfec", borderRadius: "50%", padding: "0.2rem"}}>&#x2713;</span>&nbsp;Match colors&nbsp;&mdash;&mdash;&mdash;</span><span>&nbsp;&nbsp;<span style={{color: "white", background:"#ccc", borderRadius: "50%", padding: "0.2rem"}}>&#x2713;</span>&nbsp;Save</span></div></div>
+      <button style={{ color: "white", background: "#93bfec", padding: ".5em 1em", border: "1px solid #ccc"}}>&nbsp;STEP 3: SAVE &gt;&nbsp;</button>
     </div>
   )
 }
