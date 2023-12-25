@@ -1,15 +1,18 @@
 import { useColor } from "../context/ColorContext";
 
-const ColorPalette = ({ step }) => {
-  const { shades, shadesIndex, generatedColorIndex, chooseShadeIndex, chosenPalette } = useColor();
+const ColorPalette = () => {
+  const { mode, step, shades, darkModeShades, shadesIndex, generatedColorIndex, chooseShadeIndex, chosenPalette, darkModeChosenPalette } = useColor();
   const show = (a) => a ? "inline-block" : "none";
   const background = (a) => a ? "#c8e2fd" : "#fff";
 
   const checkMark = (e) => {
+    const chosenPaletteToShow = (mode === 'dark')
+      ? darkModeChosenPalette
+      : chosenPalette
+
     if (step === 2) {
-      const colorPalette = chosenPalette.filter(c => c.backgroundKey === e.key)
+      const colorPalette = chosenPaletteToShow.filter(c => c.backgroundKey === e.key)
       const visible = (colorPalette[0].color !== "none")
-      console.log(colorPalette, visible)
       return (<div style={{ color: "green", marginLeft: "0.2rem", marginRight: "0.2rem", display: `${show(visible)}` }}>
         &#x2713;
       </div>);
@@ -22,9 +25,13 @@ const ColorPalette = ({ step }) => {
     }
   }
 
+  const shadesToShow = (mode === 'dark')
+    ? darkModeShades
+    : shades
+
   return (
     <div style={{ width: "16rem" }}>
-      {shades.map((e, i) => (
+      {shadesToShow.map((e, i) => (
         <div
           key={e.key}
           style={{

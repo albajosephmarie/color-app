@@ -9,6 +9,7 @@ body.dark-theme img {
   }
 }
 
+https://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
 
 https://github.com/Myndex/apca-w3/blob/master/src/apca-w3.js
 https://github.com/Wondermarin/react-color-palette#readme

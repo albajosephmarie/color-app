@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
+import { applyDarkModeEffect } from "../utils/tinyColorUtils";
 import { calcAPCA } from "apca-w3";
 import { colord, extend } from "colord";
 import a11yPlugin from "colord/plugins/a11y";
@@ -11,9 +12,12 @@ const initialState = {
   numberOfShades: 10,
   shades: [],
   chosenPalette: [],
+  darkModeShades: [],
+  darkModeChosenPalette: [],
   step: 1,
   shadesIndex: 0,
-  generatedColorIndex: 0
+  generatedColorIndex: 0,
+  mode: 'light',
 };
 
 const ColorContext = createContext(initialState);
@@ -56,6 +60,13 @@ export function ColorProvider({ children }) {
     })
   }
 
+  const chooseDarkModePaletteColor = (shadesIndex, colorIndex) => {
+    dispatch({
+      type: "CHOOSE_DARK_MODE_PALETTE_COLOR",
+      payload: { shadesIndex, colorIndex }
+    })
+  }
+
   const enterColor = () => {
     dispatch({
       type: "ENTER_COLOR"
@@ -75,7 +86,20 @@ export function ColorProvider({ children }) {
     });
   }
 
+  const setDarkMode = () => {
+    dispatch({
+      type: "SET_DARK_MODE"
+    })
+  }
+
+  const setLightMode = () => {
+    dispatch({
+      type: "SET_LIGHT_MODE"
+    })
+  }
+
   const value = {
+    mode: state.mode,
     color: state.color,
     numberOfShades: state.numberOfShades,
     shades: state.shades,
@@ -83,6 +107,10 @@ export function ColorProvider({ children }) {
     shadesIndex: state.shadesIndex,
     chosenPalette: state.chosenPalette,
     generatedColorIndex: state.generatedColorIndex,
+    darkModeShades: state.darkModeShades,
+    darkModeChosenPalette: state.darkModeChosenPalette,
+    setDarkMode,
+    setLightMode,
     enterColor,
     savePalette,
     updateColor,
@@ -90,7 +118,8 @@ export function ColorProvider({ children }) {
     updateNumberOfShades,
     generatePalette,
     chooseShadeIndex,
-    choosePaletteColor
+    choosePaletteColor,
+    chooseDarkModePaletteColor
   };
   return (
     <ColorContext.Provider value={value}>{children}</ColorContext.Provider>
@@ -134,6 +163,12 @@ function contrastChecker(color, colorArray) {
 function colorReducer(state, action) {
   const { type, payload } = action;
   switch (type) {
+    case "SET_DARK_MODE": {
+      return { ...state, mode: 'dark'}
+    }
+    case "SET_LIGHT_MODE": {
+      return { ...state, mode: 'light'}
+    }
     case "ENTER_COLOR": {
       return { ...state, step: 1}
     }
@@ -173,8 +208,16 @@ function colorReducer(state, action) {
       const chosenPalette = shades.map((e) => {
         return { backgroundKey: e.key, backgroundColor: e.color, colorKey: 'none', color: 'none', contrast: 0, apca: 0, AANormal: false, AALarge: false, AAANormal: false, AAALarge: false }
       })
+      const darkModeShades = shades.map( e =>  ({...e, color: applyDarkModeEffect(e.color)})).map((e, i, arr) => {
+        return { ...e, data: contrastChecker(e.color, arr) };
+      });
+      console.log('dark', darkModeShades)
+      const darkModeChosenPalette = darkModeShades.map((e) => {
+        return { backgroundKey: e.key, backgroundColor: e.color, colorKey: 'none', color: 'none', contrast: 0, apca: 0, AANormal: false, AALarge: false, AAANormal: false, AAALarge: false }
+      })
+      
       const generatedColorIndex = shades.findIndex( e =>  e.color === generatedColor )
-      return { ...state, shades, color: generatedColor, generatedColorIndex, chosenPalette, step: 2 };
+      return { ...state, shades, color: generatedColor, generatedColorIndex, chosenPalette, darkModeShades, darkModeChosenPalette, step: 2 };
     }
     case "CHOOSE_SHADE_INDEX": {
       return { ...state, shadesIndex: payload.shadesIndex }
@@ -197,6 +240,25 @@ function colorReducer(state, action) {
       const chosenPalette = [...state.chosenPalette]
       chosenPalette[payload.shadesIndex] = chosenColor
       return { ...state, chosenPalette }
+    }
+    case "CHOOSE_DARK_MODE_PALETTE_COLOR": {
+      const darkModeShadesColor = state.darkModeShades[payload.shadesIndex]
+      const textColor = darkModeShadesColor.data[payload.colorIndex]
+      const darkModeChosenColor = {
+        backgroundKey: darkModeShadesColor.key,
+        backgroundColor: darkModeShadesColor.color,
+        colorKey: textColor.key,
+        color: textColor.color,
+        contrast: textColor.contrast,
+        apca: textColor.apca,
+        AANormal: textColor.AANormal,
+        AALarge: textColor.AALarge,
+        AAANormal: textColor.AAANormal,
+        AAALarge: textColor.AAALarge,
+      }
+      const darkModeChosenPalette = [...state.darkModeChosenPalette]
+      darkModeChosenPalette[payload.shadesIndex] = darkModeChosenColor
+      return { ...state, darkModeChosenPalette}
     }
     default:
       return state;

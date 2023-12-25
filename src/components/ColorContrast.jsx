@@ -3,11 +3,14 @@ import { useColor } from '../context/ColorContext';
 
 
 const ColorContrast = () => {
-  const { shades, shadesIndex, choosePaletteColor } = useColor();
+  const { shades, shadesIndex, choosePaletteColor, darkModeShades, chooseDarkModePaletteColor, mode } = useColor();
   const [ selected, setSelected ] = useState(null)
-  const color = shades[shadesIndex].color;
-  const colorKey = shades[shadesIndex].key;
-  console.log('shades', shades[shadesIndex])
+  const shadesToShow = ( mode === 'dark') ? darkModeShades : shades;
+  const choosePaletteColorToRun = ( mode === 'dark') ? chooseDarkModePaletteColor : choosePaletteColor;
+
+  const color = shadesToShow[shadesIndex].color;
+  const colorKey = shadesToShow[shadesIndex].key;
+  console.log('shades', shadesToShow[shadesIndex])
 
   useEffect(()=>{
     setSelected(null)
@@ -24,7 +27,7 @@ const ColorContrast = () => {
   }
   const handleClick = (shadesindex, colorIndex, key) => {
     setSelected(key)
-    choosePaletteColor(shadesIndex, colorIndex)
+    choosePaletteColorToRun(shadesIndex, colorIndex)
   };
 
   const borderStyle = (key) => {
@@ -41,7 +44,7 @@ const ColorContrast = () => {
         display: 'flex', flexWrap: 'wrap', gap: '0.4rem',  marginLeft: "0.4rem", marginBottom: "0.4rem"
       }}>
         {
-          shades[shadesIndex].data.map((e, colorIndex) => {
+          shadesToShow[shadesIndex].data.map((e, colorIndex) => {
             return (
               <div key={e.key} style={{
                 border: `${borderStyle(e.key)}`,

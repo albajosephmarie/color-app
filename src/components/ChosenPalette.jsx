@@ -78,9 +78,9 @@ const ChosenCard = (e) => {
 }
 
 const ChosenPalette = ({step}) => {
-  const { chosenPalette, numberOfShades } = useColor()
+  const { chosenPalette, numberOfShades, mode, darkModeChosenPalette } = useColor()
   const cTitle = (step === 2) ?  'Your chosen palette will appear below:' : 'Light Mode'
-
+  const chosenPaletteToShow = (mode === 'dark') ? darkModeChosenPalette : chosenPalette
   return (
     <div style={{ border: '1px solid #ccc' }}>
       <h2 style={{ fontSize: '1.2rem', fontWeight: 'lighter', margin: '0.8rem 0 0.1rem 0.8rem' }}>{cTitle}</h2>
@@ -89,7 +89,7 @@ const ChosenPalette = ({step}) => {
         display: 'flex', flexWrap: 'wrap', gap: '0.4rem', width: '100%', marginLeft: "0.4rem", marginBottom: "0.4rem", padding: "0.4em"
       }}>
         {
-          chosenPalette.map((e) => {
+          chosenPaletteToShow.map((e) => {
             return (
               <div key={e.backgroundKey} style={{
                 border: '1px solid #ccc',

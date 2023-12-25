@@ -18,15 +18,37 @@ const ColorHeader = () => {
 }
 
 const ColorMode = () => {
+  const { mode, setDarkMode, setLightMode } = useColor()
+
+  const handleDarkModeClick = () => {
+    if (mode === 'light') {
+      setDarkMode()
+    }
+  }
+
+  const handleLightModeClick = () => {
+    if (mode === 'dark') {
+      setLightMode()
+    }
+  }
+
+  const lightModeButtonStyle = { width: "50%", border: "1px solid #ccc", textAlign: "center", padding: "0.2rem", fontSize: "1.2rem", color: "black", background: '#ccc', borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px' }
+  const darkModeButtonStyle = { width: "50%", border: "1px solid #ccc", textAlign: "center", padding: "0.2rem", fontSize: "1.2rem", borderTopRightRadius: '8px', borderBottomRightRadius: '8px' }
+
+  if (mode === 'dark') {
+    darkModeButtonStyle.background = 'black';
+  }
+
   return (
     <div style={{
       display: 'flex', marginTop: "0.4rem", marginBottom: "0.4rem"
     }}>
-      <div style={{ width: "50%", border: "1px solid #ccc", textAlign: "center", padding: "0.2rem", fontSize: "1.2rem", background:"#ccc", color: "yellow" }}>&#9728;</div>
-      <div style={{ width: "50%", border: "1px solid #ccc", textAlign: "center", padding: "0.2rem", fontSize: "1.2rem" }}>&#127769;</div>
+      <button style={lightModeButtonStyle} onClick={handleLightModeClick}>&#9728;</button>
+      <button style={darkModeButtonStyle} onClick={handleDarkModeClick}>&#127769;</button>
     </div>
   )
 }
+
 const Main = () => {
   return (
     <div style={{
@@ -78,14 +100,22 @@ const Header = () => {
 }
 
 const Step2 = () => {
+  const { mode } = useColor()
+  const style = {
+    display: 'flex',
+    flexDirection: 'column',
+    marginLeft: '1rem',
+    marginRight: '1rem',
+    marginTop: '1rem',
+    color: 'black',
+    background: 'white'
+  }
+  if (mode === 'dark') {
+    style.color = 'white';
+    style.background = 'black';
+  }
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      marginLeft: '1rem',
-      marginRight: '1rem',
-      marginTop: '1rem',
-    }}>
+    <div style={style}>
       <BreadCrumbs step={2} />
       <Header />
       <Main />
