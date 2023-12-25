@@ -1,6 +1,7 @@
 import { useColor } from "../context/ColorContext"
 import BreadCrumbs from "./BreadCrumbs"
 import ColorPalette from './ColorPalette'
+import ChosenPalette from "./ChosenPalette"
 
 const Main = () => {
   return (
@@ -9,6 +10,13 @@ const Main = () => {
       gap: '0.4rem',
     }}>
       <ColorPalette step={3} />
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.4rem'
+      }}>
+        <ChosenPalette step={3} />
+      </div>
     </div>
   )
 }

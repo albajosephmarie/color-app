@@ -17,7 +17,7 @@ const Main = () => {
         gap: '0.4rem'
       }}>
         <ColorContrast />
-        <ChosenPalette />
+        <ChosenPalette step={2} />
       </div>
     </div>
   )

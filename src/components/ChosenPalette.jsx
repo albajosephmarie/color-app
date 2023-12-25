@@ -77,13 +77,13 @@ const ChosenCard = (e) => {
   }
 }
 
-const ChosenPalette = () => {
+const ChosenPalette = ({step}) => {
   const { chosenPalette } = useColor()
-  console.log('chosenPalette', chosenPalette)
+  const cTitle = (step === 2) ?  'Your chosen palette will appear below:' : 'Light Mode'
 
   return (
     <div style={{ border: '1px solid #ccc' }}>
-      <h2 style={{ fontSize: '1.2rem', fontWeight: 'lighter', margin: '0.8rem 0 0.1rem 0.8rem' }}>Your chosen palette will appear below:</h2>
+      <h2 style={{ fontSize: '1.2rem', fontWeight: 'lighter', margin: '0.8rem 0 0.1rem 0.8rem' }}>{cTitle}</h2>
       <div style={{ fontSize: '1rem', marginLeft: "0.8rem", color: "#999" }}>10 colors</div>
       <div style={{
         display: 'flex', flexWrap: 'wrap', gap: '0.4rem', width: '100%', marginLeft: "0.4rem", marginBottom: "0.4rem", padding: "0.4em"
