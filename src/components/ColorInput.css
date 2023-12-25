@@ -1,0 +1,82 @@
+.color-input-card {
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 5rem auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-top: 1em;
+  margin-bottom: 1.2em;
+}
+
+.color-input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  line-height: 2rem;
+  font-size: 1.2rem;
+  margin: 0 auto 0.5rem;
+  width: 80%
+}
+
+.radio-option {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-option input {
+  margin-bottom: 0.2em;
+}
+
+.input-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} 
+
+.input-color {
+  font-size: 1.2rem;
+  padding: 0.2em;
+  width: 80%;
+}
+
+.input-picker {
+  margin-top: 1rem;
+}
+
+.shades-input-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0.510rem auto 0.5rem;
+  font-size: 1.2rem;
+  width: 80%
+}
+
+.shades-input-container legend {
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+  padding: 0.2rem;
+}
+
+.shades-input-container input {
+  padding: 0.2rem;
+  font-size: inherit;
+  margin: 0.2rem auto 0.4rem;
+  width: 12rem;
+}
+
+.generate-button {
+  display: flex;
+  font-size: 1.2rem;
+  width: 80%;
+  margin: 1rem auto 1.5rem;
+  padding: 0.2rem;
+  justify-content: center;
+  background:#27a1e3;
+  color: white;
+  border-radius: 8px;
+}

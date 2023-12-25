@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Generator</title>
+  <script src="https://cdn.jsdelivr.net/npm/chroma-js@2.1.0/chroma.min.js"></script>
+</head>
+<body>
+  <script>
+    function generateShades(baseColor, numberOfShades) {
+      const colorScale = chroma.scale([chroma(baseColor).darken(2), baseColor, chroma(baseColor).brighten(2)]).mode('lab');
+      const shades = [];
+
+      for (let i = 0; i < numberOfShades; i++) {
+        const shade = colorScale(i / (numberOfShades - 1)).hex();
+        shades.push(shade);
+      }
+
+      return shades;
+    }
+
+    const baseColor = '#995519';
+    const numberOfShades = 10;
+    const generatedShades = generateShades(baseColor, numberOfShades);
+
+    for (let i = 0; i < generatedShades.length; i++) {
+      console.log(`${i + 100} - ${generatedShades[i]}`);
+    }
+  </script>
+</body>
+</html>
