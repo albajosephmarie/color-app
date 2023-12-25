@@ -3,7 +3,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 1em;
-  margin: auto;
+  margin: auto auto;
 }
 
 .title {
