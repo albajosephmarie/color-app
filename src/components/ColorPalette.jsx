@@ -1,6 +1,6 @@
 import { useColor } from "../context/ColorContext";
 
-const ColorPalette = () => {
+const ColorPalette = ({step}) => {
   const { shades, shadesIndex, generatedColorIndex, chooseShadeIndex, chosenPalette } = useColor();
   const show = (a) => a ? "inline-block" : "none";
   const background = (a) => a ? "#c8e2fd" : "#fff";
@@ -14,16 +14,22 @@ const ColorPalette = () => {
     </div>);
   }
 
+  const handleClick = (i) => {
+    if (step === 2) {
+      chooseShadeIndex(i);
+    }
+  }
+
   return (
     <div style={{ width: "16rem" }}>
       {shades.map((e, i) => (
         <div
           key={e.key}
           style={{
-            backgroundColor: `${background(i == shadesIndex)}`,
+            backgroundColor: `${background(i == shadesIndex && step === 2)}`,
             margin: "0 auto",
           }}
-          onClick={() => chooseShadeIndex(i)}
+          onClick={() => handleClick(i)}
         >
           <div
             style={{

@@ -10,7 +10,7 @@ const Main = () => {
       display: 'flex',
       gap: '0.4rem',
     }}>
-      <ColorPalette />
+      <ColorPalette step={2} />
       <div style={{
         display: 'flex',
         flexDirection: 'column',
