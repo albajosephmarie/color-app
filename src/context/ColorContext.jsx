@@ -13,6 +13,7 @@ const initialState = {
   chosenPalette: [],
   step: 1,
   shadesIndex: 0,
+  generatedColorIndex: 0
 };
 
 const ColorContext = createContext(initialState);
@@ -61,6 +62,19 @@ export function ColorProvider({ children }) {
     })
   }
 
+  const savePalette = () => {
+    console.log('save palette')
+    dispatch({
+      type: "SAVE_PALETTE"
+    })
+  }
+
+  const pickColors = () => {
+    dispatch({ 
+      type: "PICK_COLORS"
+    });
+  }
+
   const value = {
     color: state.color,
     numberOfShades: state.numberOfShades,
@@ -68,8 +82,11 @@ export function ColorProvider({ children }) {
     step: state.step,
     shadesIndex: state.shadesIndex,
     chosenPalette: state.chosenPalette,
+    generatedColorIndex: state.generatedColorIndex,
     enterColor,
+    savePalette,
     updateColor,
+    pickColors,
     updateNumberOfShades,
     generatePalette,
     chooseShadeIndex,
@@ -120,6 +137,12 @@ function colorReducer(state, action) {
     case "ENTER_COLOR": {
       return { ...state, step: 1}
     }
+    case "PICK_COLORS": {
+      return { ...state, step: 2}
+    }    
+    case "SAVE_PALETTE": {
+      return { ...state, step: 3}
+    }
     case "UPDATE_COLOR": {
       const newColor = colord(payload.color).toHex();
       return { ...state, color: newColor };
@@ -131,6 +154,7 @@ function colorReducer(state, action) {
       const halfShades = Math.floor(state.numberOfShades / 2);
       const halfTints = state.numberOfShades - halfShades + 1;
       const color = colord(state.color);
+      const generatedColor = color.toHex();
       const shades0 = color
         .shades(halfShades + 1)
         .map((c) => c.toHex())
@@ -149,7 +173,8 @@ function colorReducer(state, action) {
       const chosenPalette = shades.map((e) => {
         return { backgroundKey: e.key, backgroundColor: e.color, colorKey: 'none', color: 'none', contrast: 0, apca: 0, AANormal: false, AALarge: false, AAANormal: false, AAALarge: false }
       })
-      return { ...state, shades, chosenPalette, step: 2 };
+      const generatedColorIndex = shades.findIndex( e =>  e.color === generatedColor )
+      return { ...state, shades, generatedColorIndex, chosenPalette, step: 2 };
     }
     case "CHOOSE_SHADE_INDEX": {
       return { ...state, shadesIndex: payload.shadesIndex }

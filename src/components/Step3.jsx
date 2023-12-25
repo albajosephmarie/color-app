@@ -1,8 +1,6 @@
 import { useColor } from "../context/ColorContext"
-import ColorContrast from "./ColorContrast"
-import ColorPalette from "./ColorPalette"
-import ChosenPalette from "./ChosenPalette"
 import BreadCrumbs from "./BreadCrumbs"
+import ColorPalette from './ChosenPalette'
 
 const Main = () => {
   return (
@@ -16,17 +14,16 @@ const Main = () => {
         flexDirection: 'column',
         gap: '0.4rem'
       }}>
-        <ColorContrast />
-        <ChosenPalette />
+        <div></div>
       </div>
     </div>
   )
 }
 
 const Header = () => {
-  const { enterColor, savePalette } = useColor();
+  const { pickColors, savePalette } = useColor();
   const handleClick = () => {
-    enterColor()
+    pickColors()
   }
   const handleSave = () => {
     savePalette()
@@ -40,12 +37,13 @@ const Header = () => {
       marginBottom: "0.4rem"
     }}>
       <button style={{ alignSelf: "flex-end", color: "#93bfec", background: "white", fontWeight: "bold", padding: ".5em 1em", border: "1px solid #ccc" }} onClick={handleClick}>&nbsp;&lt;&nbsp;GO BACK</button>
-      <button style={{ alignSelf: "flex-end", color: "white", background: "#93bfec", padding: ".5em 1em", border: "1px solid #ccc" }} onClick={handleSave}>&nbsp;STEP 3: SAVE &gt;&nbsp;</button>
+      <button style={{ alignSelf: "flex-end", color: "white", background: "#93bfec", padding: ".5em 1em", border: "1px solid #ccc" }} onClick={handleSave}>&nbsp;DOWNLOAD AS SVG&gt;&nbsp;</button>
     </div>
   )
 }
 
-const Step2 = () => {
+
+const Step3 = () => {
   return (
     <div style={{
       display: 'flex',
@@ -54,11 +52,11 @@ const Step2 = () => {
       marginRight: '1rem',
       marginTop: '1rem',
     }}>
-      <BreadCrumbs step={2}/>
+      <BreadCrumbs step={3}/>
       <Header />
       <Main />
     </div>
   )
 }
 
-export default Step2
+export default Step3

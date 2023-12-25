@@ -1,7 +1,7 @@
 import { useColor } from "../context/ColorContext";
 
 const ColorPalette = () => {
-  const { shades, shadesIndex, chooseShadeIndex, chosenPalette } = useColor();
+  const { shades, shadesIndex, generatedColorIndex, chooseShadeIndex, chosenPalette } = useColor();
   const show = (a) => a ? "inline-block" : "none";
   const background = (a) => a ? "#c8e2fd" : "#fff";
 
@@ -47,7 +47,7 @@ const ColorPalette = () => {
                   background: "#fff",
                   width: "1rem",
                   height: "1rem",
-                  display: `${show(i === shadesIndex)}`,
+                  display: `${show(i === generatedColorIndex)}`,
                   border: "1px solid #ccc",
                   borderRadius: "50%",
                   marginTop: "0.8rem",
