@@ -1,4 +1,5 @@
 import { useColor } from "../context/ColorContext"
+import { colorAppSvgDownload } from "../utils/svgUtils";
 import BreadCrumbs from "./BreadCrumbs"
 import ColorPalette from './ColorPalette'
 import ChosenPalette from "./ChosenPalette"
@@ -44,12 +45,12 @@ const Main = () => {
 }
 
 const Header = () => {
-  const { pickColors, savePalette } = useColor();
+  const { pickColors, downloadSvg } = useColor();
   const handleClick = () => {
     pickColors()
   }
-  const handleSave = () => {
-    savePalette()
+  const handleDownload = () => {
+    downloadSvg()
   }
 
   return (
@@ -60,7 +61,7 @@ const Header = () => {
       marginBottom: "0.4rem"
     }}>
       <button style={{ alignSelf: "flex-end", color: "#93bfec", background: "white", fontWeight: "bold", padding: ".5em 1em", border: "1px solid #ccc" }} onClick={handleClick}>&nbsp;&lt;&nbsp;GO BACK</button>
-      <button style={{ alignSelf: "flex-end", color: "white", background: "#93bfec", padding: ".5em 1em", border: "1px solid #ccc" }} onClick={handleSave}>&nbsp;DOWNLOAD AS SVG&gt;&nbsp;</button>
+      <button style={{ alignSelf: "flex-end", color: "white", background: "#93bfec", padding: ".5em 1em", border: "1px solid #ccc" }} onClick={handleDownload}>&nbsp;DOWNLOAD AS SVG&gt;&nbsp;</button>
     </div>
   )
 }

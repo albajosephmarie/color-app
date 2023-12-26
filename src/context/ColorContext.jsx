@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
 import { applyDarkModeEffect } from "../utils/tinyColorUtils";
+import { colorAppSvgDownload } from "../utils/svgUtils";
 import { calcAPCA } from "apca-w3";
 import { colord, extend } from "colord";
 import a11yPlugin from "colord/plugins/a11y";
@@ -74,14 +75,13 @@ export function ColorProvider({ children }) {
   }
 
   const savePalette = () => {
-    console.log('save palette')
     dispatch({
       type: "SAVE_PALETTE"
     })
   }
 
   const pickColors = () => {
-    dispatch({ 
+    dispatch({
       type: "PICK_COLORS"
     });
   }
@@ -97,6 +97,13 @@ export function ColorProvider({ children }) {
       type: "SET_LIGHT_MODE"
     })
   }
+
+  const downloadSvg = () => {
+    dispatch({
+      type: 'DOWNLOAD_SVG'
+    })
+  }
+
 
   const value = {
     mode: state.mode,
@@ -119,7 +126,8 @@ export function ColorProvider({ children }) {
     generatePalette,
     chooseShadeIndex,
     choosePaletteColor,
-    chooseDarkModePaletteColor
+    chooseDarkModePaletteColor,
+    downloadSvg
   };
   return (
     <ColorContext.Provider value={value}>{children}</ColorContext.Provider>
@@ -164,19 +172,19 @@ function colorReducer(state, action) {
   const { type, payload } = action;
   switch (type) {
     case "SET_DARK_MODE": {
-      return { ...state, mode: 'dark'}
+      return { ...state, mode: 'dark' }
     }
     case "SET_LIGHT_MODE": {
-      return { ...state, mode: 'light'}
+      return { ...state, mode: 'light' }
     }
     case "ENTER_COLOR": {
-      return { ...state, step: 1}
+      return { ...state, step: 1 }
     }
     case "PICK_COLORS": {
-      return { ...state, step: 2}
-    }    
+      return { ...state, step: 2 }
+    }
     case "SAVE_PALETTE": {
-      return { ...state, step: 3}
+      return { ...state, step: 3 }
     }
     case "UPDATE_COLOR": {
       const newColor = colord(payload.color).toHex();
@@ -208,15 +216,14 @@ function colorReducer(state, action) {
       const chosenPalette = shades.map((e) => {
         return { backgroundKey: e.key, backgroundColor: e.color, colorKey: 'none', color: 'none', contrast: 0, apca: 0, AANormal: false, AALarge: false, AAANormal: false, AAALarge: false }
       })
-      const darkModeShades = shades.map( e =>  ({...e, color: applyDarkModeEffect(e.color)})).map((e, i, arr) => {
+      const darkModeShades = shades.map(e => ({ ...e, color: applyDarkModeEffect(e.color) })).map((e, i, arr) => {
         return { ...e, data: contrastChecker(e.color, arr) };
       });
-      console.log('dark', darkModeShades)
       const darkModeChosenPalette = darkModeShades.map((e) => {
         return { backgroundKey: e.key, backgroundColor: e.color, colorKey: 'none', color: 'none', contrast: 0, apca: 0, AANormal: false, AALarge: false, AAANormal: false, AAALarge: false }
       })
-      
-      const generatedColorIndex = shades.findIndex( e =>  e.color === generatedColor )
+
+      const generatedColorIndex = shades.findIndex(e => e.color === generatedColor)
       return { ...state, shades, color: generatedColor, generatedColorIndex, chosenPalette, darkModeShades, darkModeChosenPalette, step: 2 };
     }
     case "CHOOSE_SHADE_INDEX": {
@@ -258,7 +265,11 @@ function colorReducer(state, action) {
       }
       const darkModeChosenPalette = [...state.darkModeChosenPalette]
       darkModeChosenPalette[payload.shadesIndex] = darkModeChosenColor
-      return { ...state, darkModeChosenPalette}
+      return { ...state, darkModeChosenPalette }
+    }
+    case "DOWNLOAD_SVG": {
+      colorAppSvgDownload( state.chosenPalette, state.darkModeChosenPalette );
+      return { ...state }
     }
     default:
       return state;
