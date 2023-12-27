@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { useColor } from "../context/ColorContext"
 
 const ChosenCard = (e) => {

@@ -16,6 +16,10 @@ const ColorContrast = () => {
     setSelected(null)
   }, [shadesIndex])
 
+  useEffect(()=>{
+    setSelected(null)
+  },[mode])
+
   const readable = (normal, large, char) => {
     if (normal) {
       return <div style={{ background: 'green', color: 'white', paddingLeft: '0.4rem', marginRight: '0.6rem' }}>&#x2713;{" " + char + char}</div>

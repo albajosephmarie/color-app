@@ -3,7 +3,7 @@ import { useColor } from "../context/ColorContext";
 const ColorPalette = ({ step }) => {
   const { mode, shades, darkModeShades, shadesIndex, generatedColorIndex, chooseShadeIndex, chosenPalette, darkModeChosenPalette } = useColor();
   const show = (a) => a ? "inline-block" : "none";
-  const background = (a) => a ? "#c8e2fd" : "#fff";
+  // const background = (a) => a ? "#c8e2fd" : "#fff";
 
   const checkMark = (e) => {
     if (step === 2) {
