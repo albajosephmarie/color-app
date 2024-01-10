@@ -103,6 +103,9 @@ const ChosenPalette = ({step}) => {
                 height: '9rem',
                 marginTop: '0.2rem',
                 marginLeft: "0.2rem",
+                // same black on white color for both modes                
+                background: "white",
+                color: "black"
               }}>
                 {
                   ChosenCard(e)

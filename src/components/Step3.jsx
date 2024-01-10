@@ -1,5 +1,4 @@
 import { useColor } from "../context/ColorContext"
-import { colorAppSvgDownload } from "../utils/svgUtils";
 import BreadCrumbs from "./BreadCrumbs"
 import ColorPalette from './ColorPalette'
 import ChosenPalette from "./ChosenPalette"
